@@ -499,7 +499,7 @@
         }
 
         function updateDisplay() {
-            document.title = `${formatNumber(Math.floor(cookieCount))} cookies - Cookie Clicks`;
+            document.title = `${formatNumber(Math.floor(cookieCount))} cookies`;
             cookieCountElement.textContent = `${formatNumber(Math.floor(cookieCount))} cookies`;
             perSecondElement.textContent = `per second: ${formatPerSecond(cookiesPerSecond)}`;
             scienceCountElement.textContent = `${formatScienceNumber(scienceCount)} Science`;
@@ -511,14 +511,14 @@
             document.getElementById('bank-label').innerHTML = `<strong>Bank (${ownedBanks})</strong><br><span style="font-weight: normal;">+1,400 /sec</span>`;
             document.getElementById('temple-label').innerHTML = `<strong>Temple (${ownedTemples})</strong><br><span style="font-weight: normal;">+7,800 /sec</span>`;
             document.getElementById('wizard-label').innerHTML = `<strong>Wizard Tower (${ownedWizards})</strong><br><span style="font-weight: normal;">+44,000 /sec</span>`;
-            upgradeButtonElement.textContent = `🍪 ${formatNumber(Math.floor(upgradeCost))}`;
-            grandmaButtonElement.textContent = `🍪 ${formatNumber(Math.floor(grandmaCost))}`;
-            farmButtonElement.textContent = `🍪 ${formatNumber(Math.floor(farmCost))}`;
-            mineButtonElement.textContent = `🍪 ${formatNumber(Math.floor(mineCost))}`;
-            factoryButtonElement.textContent = `🍪 ${formatNumber(Math.floor(factoryCost))}`;
-            bankButtonElement.textContent = `🍪 ${formatNumber(Math.floor(bankCost))}`;
-            templeButtonElement.textContent = `🍪 ${formatNumber(Math.floor(templeCost))}`;
-            wizardButtonElement.textContent = `🍪 ${formatNumber(Math.floor(wizardCost))}`;
+            upgradeButtonElement.textContent = `🍪 ${formatNumber(Math.round(upgradeCost))}`;
+            grandmaButtonElement.textContent = `🍪 ${formatNumber(Math.round(grandmaCost))}`;
+            farmButtonElement.textContent = `🍪 ${formatNumber(Math.round(farmCost))}`;
+            mineButtonElement.textContent = `🍪 ${formatNumber(Math.round(mineCost))}`;
+            factoryButtonElement.textContent = `🍪 ${formatNumber(Math.round(factoryCost))}`;
+            bankButtonElement.textContent = `🍪 ${formatNumber(Math.round(bankCost))}`;
+            templeButtonElement.textContent = `🍪 ${formatNumber(Math.round(templeCost))}`;
+            wizardButtonElement.textContent = `🍪 ${formatNumber(Math.round(wizardCost))}`;
             updateScienceButton();
         }
 
@@ -693,7 +693,7 @@
             if (cookieCount >= upgradeCost) {
                 cookieCount -= upgradeCost;
                 cookiesPerSecond += cursorCps;
-                upgradeCost = Math.round(upgradeCost * 1.15);
+                upgradeCost = upgradeCost * 1.15;
                 ownedCursors++;
                 updateDisplay();
                 startInterval();
@@ -723,7 +723,7 @@
             if (cookieCount >= grandmaCost) {
                 cookieCount -= grandmaCost;
                 cookiesPerSecond += grandmaCps;
-                grandmaCost = Math.round(grandmaCost * 1.15);
+                grandmaCost = grandmaCost * 1.15;
                 ownedGrandmas++;
                 updateDisplay();
                 startInterval();
