@@ -735,7 +735,7 @@
             if (cookieCount >= farmCost) {
                 cookieCount -= farmCost;
                 cookiesPerSecond += farmCps;
-                farmCost = Math.round(farmCost * 1.15);
+                farmCost = farmCost * 1.15;
                 ownedFarms++;
                 updateDisplay();
                 startInterval();
@@ -747,7 +747,7 @@
             if (cookieCount >= mineCost) {
                 cookieCount -= mineCost;
                 cookiesPerSecond += mineCps;
-                mineCost = Math.round(mineCost * 1.15);
+                mineCost = mineCost * 1.15;
                 ownedMines++;
                 updateDisplay();
                 startInterval();
@@ -759,7 +759,7 @@
             if (cookieCount >= factoryCost) {
                 cookieCount -= factoryCost;
                 cookiesPerSecond += factoryCps;
-                factoryCost = Math.round(factoryCost * 1.15);
+                factoryCost = factoryCost * 1.15;
                 ownedFactories++;
                 updateDisplay();
                 startInterval();
@@ -771,7 +771,7 @@
             if (cookieCount >= bankCost) {
                 cookieCount -= bankCost;
                 cookiesPerSecond += bankCps;
-                bankCost = Math.round(bankCost * 1.15);
+                bankCost = bankCost * 1.15;
                 ownedBanks++;
                 updateDisplay();
                 startInterval();
@@ -783,7 +783,7 @@
             if (cookieCount >= templeCost) {
                 cookieCount -= templeCost;
                 cookiesPerSecond += templeCps;
-                templeCost = Math.round(templeCost * 1.15);
+                templeCost = templeCost * 1.15;
                 ownedTemples++;
                 updateDisplay();
                 startInterval();
@@ -795,7 +795,7 @@
             if (cookieCount >= wizardCost) {
                 cookieCount -= wizardCost;
                 cookiesPerSecond += wizardCps;
-                wizardCost = Math.round(wizardCost * 1.15);
+                wizardCost = wizardCost * 1.15;
                 ownedWizards++;
                 updateDisplay();
                 startInterval();
