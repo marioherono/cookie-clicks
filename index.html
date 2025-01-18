@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading...</title>
+    <title>Cookie Clicks</title>
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -17,7 +17,6 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: hidden;
         }
 
         .loading-screen {
@@ -169,6 +168,7 @@
             font-size: 18px;
             font-weight: bold;
             margin-right: 5px;
+            height: 20vh;
         }
 
         .upgrade-item button, .science-upgrade-item button {
@@ -231,21 +231,13 @@
             display: block;
         }
 
-        /* Adjusted the username container to make sure it is visible and styled correctly */
         .username-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            display: none;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            z-index: 1100;  /* Ensure it is above all other content */
         }
 
         .username-container h2 {
@@ -261,7 +253,6 @@
             outline: none;
             text-align: center;
             color: grey;
-            margin-bottom: 10px;
         }
 
         .username-container button {
@@ -272,6 +263,7 @@
             cursor: pointer;
             background-color: white;
             color: black;
+            margin-top: 10px;
             width: calc(100% - 40px);
         }
 
@@ -305,16 +297,16 @@
         }
     </style>
 </head>
+
 <body>
     <div class="loading-screen">
         <img src="https://shorturl.at/y1xl1" alt="Loading Image">
         Loading...
-        <div class="version">v1.491</div>
+        <div class="version">v1.475</div>
     </div>
     <div class="container">
         <div id="cookie-count">0 cookies</div>
         <div id="per-second">per second: 0.0</div>
-        <div id="science-count">Science: 0.00</div>
         <div class="cookie-section">
             <img id="cookie" src="https://shorturl.at/ODxH2" alt="Cookie">
         </div>
@@ -367,29 +359,24 @@
         <div class="science-upgrade-container" id="science-upgrade-container" style="display: none;">
             <div class="science-upgrade-item">
                 <img id="science-image" src="https://shorturl.at/cE55C" alt="Science Upgrade">
-                <div id="science-label"><strong>Hero Clickers</strong><br><span style="font-weight: normal;">More Cookies/click</span></div>
+                <div id="science-label"><strong>More cookies per click</strong><br><span style="font-weight: normal;">x2 per click</span></div>
                 <button id="science-upgrade-button">🔬 20.00</button>
             </div>
         </div>
-        <audio id="clickSoundElement">
-            <source src="https://static.wikia.nocookie.net/cookieclicks/images/5/5b/Click.wav/revision/latest?cb=20250118173215" type="audio/wav">
-            Your browser does not support the audio element.
-        </audio>
-        <audio id="upgradeSoundElement">
-            <source src="https://static.wikia.nocookie.net/cookieclicks/images/1/13/BuyBuild.wav/revision/latest?cb=20250118180758" type="audio/wav">
-            Your browser does not support the audio element.
-        </audio>
-        <!-- Ensure the username-container is styled properly and visible -->
-        <div class="username-container">
-            <h2>Enter Username to continue</h2>
-            <input type="text" placeholder="Username">
-            <button id="continue-button">Continue</button>
-        </div>
+        <audio id="click-sound" src="https://static.wikia.nocookie.net/cookieclicks/images/d/d2/Click1.mp3/revision/latest?cb=20250117212028"></audio>
+        <audio id="upgrade-sound" src="https://static.wikia.nocookie.net/cookieclicks/images/b/bb/BuyUpgrade.mp3/revision/latest?cb=20250117212058"></audio>
         <div class="user-info" style="display: none;">
-            <img src="https://via.placeholder.com/40" alt="User Avatar">
+            <img src="https://shorturl.at/opac6" alt="User Profile">
             <span id="username-display"></span>
+            <div id="science-count">0.00 Science</div>
         </div>
     </div>
+    <div class="username-container">
+        <h2>Enter Username to continue</h2>
+        <input type="text" placeholder="Username">
+        <button id="continue-button">Continue</button>
+    </div>
+
     <script>
         let cookieCount = 0;
         let cookiesPerClick = 1;
@@ -444,6 +431,8 @@
         const templeButtonElement = document.getElementById('temple-button');
         const wizardButtonElement = document.getElementById('wizard-button');
         const cursorImageElement = document.getElementById('cursor-image');
+        const clickSoundElement = document.getElementById('click-sound');
+        const upgradeSoundElement = document.getElementById('upgrade-sound');
         const scienceCountElement = document.getElementById('science-count');
         const userInfoElement = document.querySelector('.user-info');
         const usernameDisplayElement = document.getElementById('username-display');
@@ -460,7 +449,7 @@
                 const tier = Math.floor(Math.log10(number) / 3);
                 const suffix = suffixes[tier - 1];
                 const scale = Math.pow(10, tier * 3);
-                const scaled = number / scale
+                const scaled = number / scale;
                 return `${scaled.toFixed(3)}${suffix}`;
             }
             return Math.floor(number).toLocaleString();
@@ -494,6 +483,7 @@
             }
         }
 
+        // New function to format cookies per click in the same way as cookies per second
         function formatPerClick(number) {
             if (number >= 1000000) {
                 const tier = Math.floor(Math.log10(number) / 3);
@@ -504,15 +494,15 @@
             } else if (number >= 1000) {
                 return Math.floor(number).toLocaleString();
             } else {
-                return number.toFixed(1);
+                return (number).toFixed(1);
             }
         }
 
         function updateDisplay() {
-            document.title = `${formatNumber(Math.floor(cookieCount))} cookies - Cookie Clicks`;
+            document.title = `${formatNumber(Math.floor(cookieCount))} cookies`;
             cookieCountElement.textContent = `${formatNumber(Math.floor(cookieCount))} cookies`;
             perSecondElement.textContent = `per second: ${formatPerSecond(cookiesPerSecond)}`;
-            scienceCountElement.textContent = `Science: ${formatScienceNumber(scienceCount)}`;
+            scienceCountElement.textContent = `${formatScienceNumber(scienceCount)} Science`;
             document.getElementById('cursor-label').innerHTML = `<strong>Cursor (${ownedCursors})</strong><br><span style="font-weight: normal;">+0.1 /sec</span>`;
             document.getElementById('grandma-label').innerHTML = `<strong>Grandma (${ownedGrandmas})</strong><br><span style="font-weight: normal;">+1 /sec</span>`;
             document.getElementById('farm-label').innerHTML = `<strong>Farm (${ownedFarms})</strong><br><span style="font-weight: normal;">+8 /sec</span>`;
@@ -695,7 +685,7 @@
                 scienceCount += cookiesPerClick / 100; // Add science points for each click
                 createClickerClone(cookiesPerClick, event.clientX, event.clientY);
                 updateDisplay();
-                document.getElementById('clickSoundElement').play().catch(err => console.error("Error playing click sound:", err));
+                clickSoundElement.play();
             }
         });
 
@@ -707,7 +697,7 @@
                 ownedCursors++;
                 updateDisplay();
                 startInterval();
-                document.getElementById('upgradeSoundElement').play().catch(err => console.error("Error playing upgrade sound:", err));
+                upgradeSoundElement.play();
             }
         });
 
@@ -725,7 +715,7 @@
                 }
                 updateScienceButton();
                 updateDisplay();
-                document.getElementById('upgradeSoundElement').play().catch(err => console.error("Error playing upgrade sound:", err));
+                upgradeSoundElement.play();
             }
         });
 
@@ -737,7 +727,7 @@
                 ownedGrandmas++;
                 updateDisplay();
                 startInterval();
-                document.getElementById('upgradeSoundElement').play().catch(err => console.error("Error playing upgrade sound:", err));
+                upgradeSoundElement.play();
             }
         });
 
@@ -749,7 +739,7 @@
                 ownedFarms++;
                 updateDisplay();
                 startInterval();
-                document.getElementById('upgradeSoundElement').play().catch(err => console.error("Error playing upgrade sound:", err));
+                upgradeSoundElement.play();
             }
         });
 
@@ -761,7 +751,7 @@
                 ownedMines++;
                 updateDisplay();
                 startInterval();
-                document.getElementById('upgradeSoundElement').play().catch(err => console.error("Error playing upgrade sound:", err));
+                upgradeSoundElement.play();
             }
         });
 
@@ -773,7 +763,7 @@
                 ownedFactories++;
                 updateDisplay();
                 startInterval();
-                document.getElementById('upgradeSoundElement').play().catch(err => console.error("Error playing upgrade sound:", err));
+                upgradeSoundElement.play();
             }
         });
 
@@ -785,7 +775,7 @@
                 ownedBanks++;
                 updateDisplay();
                 startInterval();
-                document.getElementById('upgradeSoundElement').play().catch(err => console.error("Error playing upgrade sound:", err));
+                upgradeSoundElement.play();
             }
         });
 
@@ -797,7 +787,7 @@
                 ownedTemples++;
                 updateDisplay();
                 startInterval();
-                document.getElementById('upgradeSoundElement').play().catch(err => console.error("Error playing upgrade sound:", err));
+                upgradeSoundElement.play();
             }
         });
 
@@ -809,7 +799,7 @@
                 ownedWizards++;
                 updateDisplay();
                 startInterval();
-                document.getElementById('upgradeSoundElement').play().catch(err => console.error("Error playing upgrade sound:", err));
+                upgradeSoundElement.play();
             }
         });
 
