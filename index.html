@@ -17,6 +17,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            overflow: hidden;
         }
 
         .loading-screen {
@@ -230,13 +231,20 @@
             display: block;
         }
 
+        /* Adjusted the username container to make sure it is visible and styled correctly */
         .username-container {
-            display: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
         }
 
         .username-container h2 {
@@ -252,6 +260,7 @@
             outline: none;
             text-align: center;
             color: grey;
+            margin-bottom: 10px;
         }
 
         .username-container button {
@@ -262,7 +271,6 @@
             cursor: pointer;
             background-color: white;
             color: black;
-            margin-top: 10px;
             width: calc(100% - 40px);
         }
 
@@ -369,6 +377,7 @@
             <source src="https://static.wikia.nocookie.net/cookieclicks/images/1/13/BuyBuild.wav/revision/latest?cb=20250118180758" type="audio/wav">
             Your browser does not support the audio element.
         </audio>
+        <!-- Ensure the username-container is styled properly and visible -->
         <div class="username-container">
             <h2>Enter Username to continue</h2>
             <input type="text" placeholder="Username">
