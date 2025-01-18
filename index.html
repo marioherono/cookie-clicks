@@ -363,8 +363,6 @@
                 <button id="science-upgrade-button">🔬 20.00</button>
             </div>
         </div>
-        <audio id="click-sound" src="https://static.wikia.nocookie.net/cookieclicks/images/5/5b/Click.wav/revision/latest?cb=20250118173215"></audio>
-        <audio id="upgrade-sound" src="https://static.wikia.nocookie.net/cookieclicks/images/1/13/BuyBuild.wav/revision/latest?cb=20250118180758"></audio>
         <div class="user-info" style="display: none;">
             <img src="https://shorturl.at/opac6" alt="User Profile">
             <span id="username-display"></span>
@@ -431,8 +429,6 @@
         const templeButtonElement = document.getElementById('temple-button');
         const wizardButtonElement = document.getElementById('wizard-button');
         const cursorImageElement = document.getElementById('cursor-image');
-        const clickSoundElement = document.getElementById('click-sound');
-        const upgradeSoundElement = document.getElementById('upgrade-sound');
         const scienceCountElement = document.getElementById('science-count');
         const userInfoElement = document.querySelector('.user-info');
         const usernameDisplayElement = document.getElementById('username-display');
@@ -443,6 +439,9 @@
         const scienceUpgradeContainer = document.getElementById('science-upgrade-container');
         const scienceUpgradeButton = document.getElementById('science-upgrade-button');
         const scienceLabel = document.getElementById('science-label');
+
+        const clickSound = new Audio('https://static.wikia.nocookie.net/cookieclicks/images/5/5b/Click.wav/revision/latest?cb=20250118173215');
+        const upgradeSound = new Audio('https://static.wikia.nocookie.net/cookieclicks/images/1/13/BuyBuild.wav/revision/latest?cb=20250118180758');
 
         function formatNumber(number) {
             if (number >= 1000000) {
