@@ -363,13 +363,25 @@
                 <button id="science-upgrade-button">🔬 20.00</button>
             </div>
         </div>
-        <audio id="clickSoundElement" src="https://static.wikia.nocookie.net/cookieclicks/images/5/5b/Click.wav/revision/latest?cb=20250118173215"></audio>
-        <audio id="upgradeSoundElement" src="https://static.wikia.nocookie.net/cookieclicks/images/1/13/BuyBuild.wav/revision/latest?cb=20250118180758"></audio>
-        <div class="user-info" style="display: none;">
-            <img src="https://shorturl.at/opac6" alt="User Profile">
-            <span id="username-display"></span>
-            <div id="science-count">0.00 Science</div>
-        </div>
+        <audio id="clickSoundElement" controls>
+  <source src="https://static.wikia.nocookie.net/cookieclicks/images/5/5b/Click.wav/revision/latest?cb=20250118173215" type="audio/wav">
+  Your browser does not support the audio element.
+</audio>
+
+<audio id="upgradeSoundElement" controls>
+  <source src="https://static.wikia.nocookie.net/cookieclicks/images/1/13/BuyBuild.wav/revision/latest?cb=20250118180758" type="audio/wav">
+  Your browser does not support the audio element.
+</audio>
+
+<script>
+  const clickSound = document.getElementById("clickSoundElement");
+  const upgradeSound = document.getElementById("upgradeSoundElement");
+
+  // Example: Play sound on a button click
+  document.addEventListener("click", () => {
+    clickSound.play().catch((err) => console.error("Error playing click sound:", err));
+    upgradeSound.play().catch((err) => console.error("Error playing upgrade sound:", err));
+  });
     </div>
     <div class="username-container">
         <h2>Enter Username to continue</h2>
