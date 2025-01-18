@@ -499,10 +499,10 @@
         }
 
         function updateDisplay() {
-            document.title = `${formatNumber(Math.floor(cookieCount))} cookies`;
+            document.title = `${formatNumber(Math.floor(cookieCount))} cookies - Cookie Clicks`;
             cookieCountElement.textContent = `${formatNumber(Math.floor(cookieCount))} cookies`;
             perSecondElement.textContent = `per second: ${formatPerSecond(cookiesPerSecond)}`;
-            scienceCountElement.textContent = `${formatScienceNumber(scienceCount)} Science`;
+            scienceCountElement.textContent = `Science: ${formatScienceNumber(scienceCount)}`;
             document.getElementById('cursor-label').innerHTML = `<strong>Cursor (${ownedCursors})</strong><br><span style="font-weight: normal;">+0.1 /sec</span>`;
             document.getElementById('grandma-label').innerHTML = `<strong>Grandma (${ownedGrandmas})</strong><br><span style="font-weight: normal;">+1 /sec</span>`;
             document.getElementById('farm-label').innerHTML = `<strong>Farm (${ownedFarms})</strong><br><span style="font-weight: normal;">+8 /sec</span>`;
