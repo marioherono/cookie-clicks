@@ -363,6 +363,8 @@
                 <button id="science-upgrade-button">🔬 20.00</button>
             </div>
         </div>
+        <audio id="clickSoundElement" src="https://static.wikia.nocookie.net/cookieclicks/images/5/5b/Click.wav/revision/latest?cb=20250118173215"></audio>
+        <audio id="upgradeSoundElement" src="https://static.wikia.nocookie.net/cookieclicks/images/1/13/BuyBuild.wav/revision/latest?cb=20250118180758"></audio>
         <div class="user-info" style="display: none;">
             <img src="https://shorturl.at/opac6" alt="User Profile">
             <span id="username-display"></span>
@@ -439,9 +441,6 @@
         const scienceUpgradeContainer = document.getElementById('science-upgrade-container');
         const scienceUpgradeButton = document.getElementById('science-upgrade-button');
         const scienceLabel = document.getElementById('science-label');
-
-        const clickSoundElement = new Audio('https://static.wikia.nocookie.net/cookieclicks/images/5/5b/Click.wav/revision/latest?cb=20250118173215');
-        const upgradeSoundElement = new Audio('https://static.wikia.nocookie.net/cookieclicks/images/1/13/BuyBuild.wav/revision/latest?cb=20250118180758');
 
         function formatNumber(number) {
             if (number >= 1000000) {
