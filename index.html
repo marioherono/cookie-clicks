@@ -314,6 +314,7 @@
     <div class="container">
         <div id="cookie-count">0 cookies</div>
         <div id="per-second">per second: 0.0</div>
+        <div id="science-count">Science: 0.00</div>
         <div class="cookie-section">
             <img id="cookie" src="https://shorturl.at/ODxH2" alt="Cookie">
         </div>
@@ -384,6 +385,10 @@
             <input type="text" placeholder="Username">
             <button id="continue-button">Continue</button>
         </div>
+        <div class="user-info" style="display: none;">
+            <img src="https://via.placeholder.com/40" alt="User Avatar">
+            <span id="username-display"></span>
+        </div>
     </div>
     <script>
         let cookieCount = 0;
@@ -441,6 +446,7 @@
         const cursorImageElement = document.getElementById('cursor-image');
         const scienceCountElement = document.getElementById('science-count');
         const userInfoElement = document.querySelector('.user-info');
+        const usernameDisplayElement = document.getElementById('username-display');
         const continueButton = document.getElementById('continue-button');
         const buildingsButton = document.getElementById('buildings-button');
         const scienceButton = document.getElementById('science-button');
@@ -454,7 +460,7 @@
                 const tier = Math.floor(Math.log10(number) / 3);
                 const suffix = suffixes[tier - 1];
                 const scale = Math.pow(10, tier * 3);
-                const scaled = number / scale;
+                const scaled = number / scale
                 return `${scaled.toFixed(3)}${suffix}`;
             }
             return Math.floor(number).toLocaleString();
