@@ -51,6 +51,10 @@
             cookieCount++;
             document.getElementById('cookieCount').innerText = `${cookieCount} cookies`;
         });
+
+        setInterval(() => {
+            document.title = `${cookieCount} cookies - Cookie Clicks`;
+        }, 500);
     </script>
 </body>
 </html>
