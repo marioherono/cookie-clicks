@@ -15,6 +15,14 @@
             margin: 0;
             background-color: #f0f0f0;
         }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            left: 100px;
+            right: 120px;
+        }
         #cookie {
             width: 200px;
             height: 200px;
@@ -30,15 +38,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="cookie"></div>
-    <div id="cookieCount">0 Cookies</div>
+    <div class="container">
+        <div id="cookie"></div>
+        <div id="cookieCount">0 cookies</div>
+    </div>
 
     <script>
         let cookieCount = 0;
 
         document.getElementById('cookie').addEventListener('click', () => {
             cookieCount++;
-            document.getElementById('cookieCount').innerText = `Cookies: ${cookieCount}`;
+            document.getElementById('cookieCount').innerText = `${cookieCount} cookies`;
         });
     </script>
 </body>
