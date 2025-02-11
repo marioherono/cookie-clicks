@@ -49,8 +49,9 @@
         let cookieCount = 0;
 
         const formatNumber = (num) => {
-            if (num < 1000) return num;
-            const suffixes = ['', 'e3', 'e4', 'e5', 'e6', 'e7', 'e8', 'e9'];
+            if (num < 1000) return Math.floor(num);
+            if (num >= 10000) return num.toExponential(2).replace('e+', 'e');
+            const suffixes = ['', 'K', 'M', 'B', 'T'];
             const tier = Math.floor(Math.log10(num) / 3);
             const suffix = suffixes[tier];
             const scaled = num / Math.pow(10, tier * 3);
@@ -58,12 +59,12 @@
         };
 
         document.getElementById('cookie').addEventListener('click', () => {
-            cookieCount += 25;
-            document.getElementById('cookieCount').innerText = `${formatNumber(Math.floor(cookieCount))} cookies`;
+            cookieCount++;
+            document.getElementById('cookieCount').innerText = `${formatNumber(cookieCount)} cookies`;
         });
 
         setInterval(() => {
-            document.title = `${formatNumber(Math.floor(cookieCount))} cookies - Cookie Clicks`;
+            document.title = `${formatNumber(cookieCount)} cookies - Cookie Clicks`;
         }, 500);
     </script>
 </body>
