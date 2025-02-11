@@ -6,7 +6,7 @@
     <title>Cookie Clicks</title>
     <style>
         body {
-            font-family: 'Rubik', sans-serif;
+            font-family: 'Roboto Condensed', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -15,33 +15,33 @@
             margin: 0;
             background-color: #f0f0f0;
         }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            left: 100px;
-            right: 120px;
-        }
         #cookie {
-            width: 200px;
-            height: 200px;
+            width: 220px;
+            height: 220px;
             background-image: url('https://shorturl.at/R36Qm');
             background-size: cover;
             cursor: pointer;
+            position: relative;
+            left: -200px;
+            top: 70px;
+            transition: transform 0.2s;
+        }
+        #cookie:hover {
+            transform: scale(1.15);
         }
         #cookieCount {
             margin-top: 20px;
-            font-size: 24px;
+            font-size: 34px;
+            position: relative;
+            left: -205px;
+            top: -360px;
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div id="cookie"></div>
-        <div id="cookieCount">0 cookies</div>
-    </div>
+    <div id="cookie"></div>
+    <div id="cookieCount">0 cookies</div>
 
     <script>
         let cookieCount = 0;
