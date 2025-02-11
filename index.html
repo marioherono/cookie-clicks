@@ -47,6 +47,7 @@
 
     <script>
         let cookieCount = 0;
+        let cookiesPerClick = 612;
 
         const formatNumber = (num) => {
             if (num < 1000) return Math.floor(num);
@@ -59,7 +60,7 @@
         };
 
         document.getElementById('cookie').addEventListener('click', () => {
-            cookieCount++;
+            cookieCount += cookiesPerClick;
             document.getElementById('cookieCount').innerText = `${formatNumber(cookieCount)} cookies`;
         });
 
