@@ -23,20 +23,25 @@
             background-size: cover;
             cursor: pointer;
             position: relative;
-            left: -260px;
-            top: 70px;
             transition: transform 0.2s;
         }
         #cookie:hover {
             transform: scale(1.15);
+        }
+        .cookie-clone {
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            background-image: url('https://play-lh.googleusercontent.com/Z1MOuuiD05ZN5LkVmMEvKF0mqAc-FknaQ2j8s4dZiO-LSPQX4EEA3RVJdlQEtxe96ok');
+            background-size: cover;
+            opacity: 0.75;
+            transition: opacity 0.5s, transform 20s linear;
         }
         #cookieCount {
             margin-top: 20px;
             font-size: 34px;
             color: #ffffff;
             position: relative;
-            left: -265px;
-            top: -360px;
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400&display=swap" rel="stylesheet">
@@ -59,9 +64,26 @@
             return scaled.toFixed(2) + suffix;
         };
 
+        const createCookieClone = () => {
+            const clone = document.createElement('div');
+            clone.className = 'cookie-clone';
+            clone.style.left = Math.random() * window.innerWidth + 'px';
+            clone.style.top = Math.random() * window.innerHeight + 'px';
+            document.body.appendChild(clone);
+
+            setTimeout(() => {
+                clone.style.transform = `translateY(-${window.innerHeight + 220}px)`;
+                clone.style.opacity = 0;
+                setTimeout(() => {
+                    clone.remove();
+                }, 20000);
+            }, 0);
+        };
+
         document.getElementById('cookie').addEventListener('click', () => {
             cookieCount += cookiesPerClick;
             document.getElementById('cookieCount').innerText = `${formatNumber(cookieCount)} cookies`;
+            createCookieClone();
         });
 
         setInterval(() => {
