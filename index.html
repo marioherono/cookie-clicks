@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cookie Clicks</title>
+    <title>loading</title>
     <style>
         body {
             font-family: 'Roboto Condensed', sans-serif;
@@ -35,7 +35,27 @@
             color: #ffffff;
             position: relative;
             left: -320px;
-            top: -400px;
+            top: -360px;
+        }
+        #cursor {
+            width: 70px;
+            height: 70px;
+            background-image: url('https://static.vecteezy.com/system/resources/thumbnails/004/956/057/small_2x/hand-click-icon-symbol-vector.jpg');
+            background-size: cover;
+            cursor: pointer;
+            position: relative;
+            top: -420px;
+            left: 100px;
+            color: #ffffff;
+            text-align: center;
+            font-size: 14px;
+        }
+        #cursorPrice {
+            position: relative;
+            top: -465px;
+            left: 200px;
+            color: darkblue;
+            font-size: 18px;
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400&display=swap" rel="stylesheet">
@@ -43,19 +63,19 @@
 <body>
     <div id="cookie"></div>
     <div id="cookieCount">0 cookies</div>
+    <div id="cursor" title="Price: 15 cookies">Cursor</div>
+    <div id="cursorPrice">15 cookies</div>
 
     <script>
         let cookieCount = 0;
         let cookiesPerClick = 1;
+        let cursorPrice = 15;
 
         const formatNumber = (num) => {
-            if (num < 1000) return Math.floor(num);
-            if (num >= 10000) return Math.floor(num).toExponential(2).replace('e+', 'e');
-            const suffixes = ['', 'e3', 'M', 'B', 'T'];
-            const tier = Math.floor(Math.log10(num) / 3);
-            const suffix = suffixes[tier];
-            const scaled = Math.floor(num / Math.pow(10, tier * 3));
-            return scaled.toFixed(2) + suffix;
+            if (num < 10000) {
+                return Math.floor(num);
+            }
+            return num.toExponential(2).replace('e+', 'e');
         };
 
         const animateCookie = (element) => {
@@ -83,9 +103,20 @@
             animateCookie(document.getElementById('cookie'));
         });
 
+        document.getElementById('cursor').addEventListener('click', () => {
+            if (cookieCount >= cursorPrice) {
+                cookieCount -= cursorPrice;
+                cookiesPerClick++;
+                cursorPrice = Math.round(cursorPrice * 1.15);
+                document.getElementById('cookieCount').innerText = `${formatNumber(cookieCount)} cookies`;
+                document.getElementById('cursorPrice').innerText = `${formatNumber(cursorPrice)} cookies`;
+                document.getElementById('cursor').title = `Price: ${formatNumber(cursorPrice)} cookies`;
+            }
+        });
+
         setInterval(() => {
-            document.title = `${formatNumber(cookieCount)} cookies - Cookie Clicks`;
-        }, 500);
+            document.title = `cookies ${formatNumber(cookieCount)}`;
+        }, 1000);
     </script>
 </body>
 </html>
