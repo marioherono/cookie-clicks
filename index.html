@@ -25,7 +25,7 @@
             position: relative;
             transition: transform 0.2s;
             left: -320px;
-	    top: 90px;
+					  top: 90px;
             border-radius: 50%;
         }
         #cookie:hover {
@@ -47,9 +47,9 @@
             right: -450px;
             top: -240px;
             text-align: center;
-	    font-weight: regular;
+					  font-weight: regular;
         }
-        #cursor, #upgrade {
+        #cursor, #upgrade, #farm {
             width: 70px;
             height: 70px;
             background-size: cover;
@@ -70,7 +70,12 @@
             top: -320px;
             left: 100px;
         }
-        #cursorTitle, #upgradeTitle {
+        #farm {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6HRnD80sta1lWAU4LDfh4J4827X4tjsBX8g&s');
+            top: -310px;
+            left: 100px;
+        }
+        #cursorTitle, #upgradeTitle, #farmTitle {
             position: relative;
             top: -300px;
             left: 180px;
@@ -82,7 +87,11 @@
             left: 217px;
             top: -285px;
         }
-        #cursorPrice, #upgradePrice {
+        #farmTitle {
+            left: 165px;
+            top: -270px;
+        }
+        #cursorPrice, #upgradePrice, #farmPrice {
             position: relative;
             top: -365px;
             left: 190px;
@@ -93,6 +102,10 @@
         #upgradePrice {
             left: 195px;
             top: -350px;
+        }
+        #farmPrice {
+            left: 195px;
+            top: -335px;
         }
         .clickClone {
             position: absolute;
@@ -115,6 +128,9 @@
     <div id="upgradeTitle">Stumble Guys</div>
     <div id="upgrade"></div>
     <div id="upgradePrice" title="Price: 100 cookies">100 cookies</div>
+    <div id="farmTitle">Farm</div>
+    <div id="farm"></div>
+    <div id="farmPrice" title="Price: 1200 cookies">1200 cookies</div>
 
     <script>
         let cookieCount = 0;
@@ -122,6 +138,7 @@
         let cookiesPerSecond = 0.0;
         let cursorPrice = 15;
         let upgradePrice = 100;
+        let farmPrice = 1200;
 
         const formatNumber = (num) => {
             if (num < 1000000) {
@@ -131,7 +148,7 @@
         };
 
         const formatPerSecond = (num) => {
-            if (num < 1000000) {
+            if (num < 100000) {
                 return num.toFixed(1);
             }
             return num.toExponential(3).replace('e+', 'e');
@@ -179,6 +196,18 @@
                 document.getElementById('cookieCount').innerText = `${formatNumber(cookieCount)} cookies`;
                 document.getElementById('upgradePrice').innerText = `${formatNumber(upgradePrice)} cookies`;
                 document.getElementById('upgrade').title = `Price: ${formatNumber(upgradePrice)} cookies`;
+                document.getElementById('perSecond').innerText = `per second: ${formatPerSecond(cookiesPerSecond)}`;
+            }
+        });
+
+        document.getElementById('farm').addEventListener('click', () => {
+            if (cookieCount >= farmPrice) {
+                cookieCount -= farmPrice;
+                cookiesPerSecond += 8;
+                farmPrice = Math.round(farmPrice * 1.15);
+                document.getElementById('cookieCount').innerText = `${formatNumber(cookieCount)} cookies`;
+                document.getElementById('farmPrice').innerText = `${formatNumber(farmPrice)} cookies`;
+                document.getElementById('farm').title = `Price: ${formatNumber(farmPrice)} cookies`;
                 document.getElementById('perSecond').innerText = `per second: ${formatPerSecond(cookiesPerSecond)}`;
             }
         });
