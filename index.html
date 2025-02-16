@@ -16,6 +16,12 @@
             background-image: url('https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTEyL3Jhd3BpeGVsX29mZmljZV8zOF9hYnN0cmFjdF9hcnRfb2Zfd2F2eV9saWdodF9saW5lc193aXRoX2FfZGFya181NTY1Y2ExOC0wZTI5LTQ4MmUtYTUxMC05ODYzZTVhNTE5N2ZfMi5qcGc.jpg');
             background-size: cover;
         }
+        #gameContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
         #cookie {
             width: 220px;
             height: 220px;
@@ -25,7 +31,7 @@
             position: relative;
             transition: transform 0.2s;
             left: -320px;
-					  top: 90px;
+            top: 250px;
             border-radius: 50%;
         }
         #cookie:hover {
@@ -37,7 +43,7 @@
             color: #2458BF;
             position: relative;
             left: -320px;
-            top: -250px;
+            top: -110px;
         }
         #perSecond {
             font-size: 18px;
@@ -45,9 +51,9 @@
             position: relative;
             left: -320px;
             right: -450px;
-            top: -240px;
+            top: -90px;
             text-align: center;
-					  font-weight: regular;
+            font-weight: regular;
         }
         #cursor, #upgrade, #farm {
             width: 70px;
@@ -55,7 +61,7 @@
             background-size: cover;
             cursor: pointer;
             position: relative;
-            top: -330px;
+            top: -240px;
             left: 100px;
             color: #ffffff;
             text-align: center;
@@ -67,17 +73,17 @@
         }
         #upgrade {
             background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh8DvpffsKdmOPzi22HRh7YYv-ouVdmDZR8A&s');
-            top: -320px;
+            top: -240px;
             left: 100px;
         }
         #farm {
             background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6HRnD80sta1lWAU4LDfh4J4827X4tjsBX8g&s');
-            top: -310px;
+            top: -250px;
             left: 100px;
         }
         #cursorTitle, #upgradeTitle, #farmTitle {
             position: relative;
-            top: -300px;
+            top: -210px;
             left: 180px;
             color: white;
             font-weight: bold;
@@ -85,15 +91,15 @@
         }
         #upgradeTitle {
             left: 217px;
-            top: -285px;
+            top: -195px;
         }
         #farmTitle {
             left: 165px;
-            top: -270px;
+            top: -210px;
         }
         #cursorPrice, #upgradePrice, #farmPrice {
             position: relative;
-            top: -365px;
+            top: -275px;
             left: 190px;
             color: white;
             font-size: 19px;
@@ -101,11 +107,11 @@
         }
         #upgradePrice {
             left: 195px;
-            top: -350px;
+            top: -260px;
         }
         #farmPrice {
             left: 195px;
-            top: -335px;
+            top: -275px;
         }
         .clickClone {
             position: absolute;
@@ -115,22 +121,55 @@
             opacity: 1;
             transition: transform 0.337s ease-out, opacity 0.337s ease-out;
         }
+        #fullscreenMessage {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgb(0,0,0);
+            font-size: 24px;
+            background: rgb(29,255,109);
+            padding: 20px;
+            border-radius: 30px;
+        }
+        .fullscreen #gameContainer {
+            display: flex;
+        }
+        .fullscreen #fullscreenMessage {
+            display: none;
+        }
+        .fullscreen body {
+            background-image: url('https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTEyL3Jhd3BpeGVsX29mZmljZV8zOF9hYnN0cmFjdF9hcnRfb2Zfd2F2eV9saWdodF9saW5lc193aXRoX2FfZGFya181NTY1Y2ExOC0wZTI5LTQ4MmUtYTUxMC05ODYzZTVhNTE5N2ZfMi5qcGc.jpg');
+        }
+        body:not(.fullscreen) #gameContainer {
+            display: none;
+        }
+        body:not(.fullscreen) {
+            background: rgb(50,135,201);
+        }
+        body:not(.fullscreen) #fullscreenMessage {
+            display: block;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="cookie"></div>
-    <div id="cookieCount">0 cookies</div>
-    <div id="perSecond">per second: 0.0</div>
-    <div id="cursorTitle">Cursor</div>
-    <div id="cursor"></div>
-    <div id="cursorPrice" title="Price: 15 cookies">15 cookies</div>
-    <div id="upgradeTitle">Stumble Guys</div>
-    <div id="upgrade"></div>
-    <div id="upgradePrice" title="Price: 100 cookies">100 cookies</div>
-    <div id="farmTitle">Farm</div>
-    <div id="farm"></div>
-    <div id="farmPrice" title="Price: 1200 cookies">1200 cookies</div>
+    <div id="fullscreenMessage">Switch to full screen to play</div>
+    <div id="gameContainer">
+        <div id="cookie"></div>
+        <div id="cookieCount">0 cookies</div>
+        <div id="perSecond">per second: 0.0</div>
+        <div id="cursorTitle">Cursor</div>
+        <div id="cursor"></div>
+        <div id="cursorPrice" title="Price: 15 cookies">15 cookies</div>
+        <div id="upgradeTitle">Stumble Guys</div>
+        <div id="upgrade"></div>
+        <div id="upgradePrice" title="Price: 100 cookies">100 cookies</div>
+        <div id="farmTitle">Farm</div>
+        <div id="farm"></div>
+        <div id="farmPrice" title="Price: 1200 cookies">1200 cookies</div>
+    </div>
 
     <script>
         let cookieCount = 0;
@@ -220,6 +259,17 @@
         setInterval(() => {
             document.title = `${formatNumber(cookieCount)} cookies - Cookie Clicks`;
         }, 1000);
+
+        const checkFullscreen = () => {
+            if (window.innerHeight === screen.height) {
+                document.body.classList.add('fullscreen');
+            } else {
+                document.body.classList.remove('fullscreen');
+            }
+        };
+
+        window.addEventListener('resize', checkFullscreen);
+        checkFullscreen();
     </script>
 </body>
 </html>
