@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cookie Clicks</title>
+    <title>0 cookies - Cookie Clicks</title>
     <style>
         body {
             font-family: 'Merriweather Sans', sans-serif;
@@ -131,7 +131,7 @@
         };
 
         const formatPerSecond = (num) => {
-            if (num < 100000) {
+            if (num < 1000000) {
                 return num.toFixed(1);
             }
             return num.toExponential(3).replace('e+', 'e');
@@ -189,7 +189,7 @@
         }, 100);
 
         setInterval(() => {
-            document.title = `Cookies: ${formatNumber(cookieCount)}`;
+            document.title = `${formatNumber(cookieCount)} cookies - Cookie Clicks`;
         }, 1000);
     </script>
 </body>
