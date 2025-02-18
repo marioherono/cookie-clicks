@@ -208,7 +208,7 @@
 
   <script>
     let cookieCount = 0;
-    let cookiesPerClick = 1;
+    let cookiesPerClick = 200e3;
     let cookiesPerSecond = 0.0;
     let cursorPrice = 15;
     let upgradePrice = 100;
@@ -231,7 +231,7 @@
     const createClickClone = (x, y) => {
       const clickClone = document.createElement('div');
       clickClone.className = 'clickClone';
-      clickClone.innerText = '+1';
+      clickClone.innerText = '+200k';
       clickClone.style.left = `${x}px`;
       clickClone.style.top = `${y}px`;
       document.body.appendChild(clickClone);
