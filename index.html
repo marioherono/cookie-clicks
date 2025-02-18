@@ -267,7 +267,7 @@
         document.getElementById('cookieText').innerText = `${formatNumber(cookieCount)}`;
         document.getElementById('upgradePrice').innerText = `${formatNumber(upgradePrice)} cookies`;
         document.getElementById('upgrade').title = `Price: ${formatNumber(upgradePrice)} cookies`;
-        document.getElementById('perSecond').innerText = `per second: ${formatPerSecond(cookiesPerSecond)}`;
+        document.getElementById('perSecond').innerText = `+${formatPerSecond(cookiesPerSecond)} cookies/s`;
       }
     });
 
@@ -279,7 +279,7 @@
         document.getElementById('cookieText').innerText = `${formatNumber(cookieCount)}`;
         document.getElementById('farmPrice').innerText = `${formatNumber(farmPrice)} cookies`;
         document.getElementById('farm').title = `Price: ${formatNumber(farmPrice)} cookies`;
-        document.getElementById('perSecond').innerText = `per second: ${formatPerSecond(cookiesPerSecond)}`;
+        document.getElementById('perSecond').innerText = `+${formatPerSecond(cookiesPerSecond)} cookies/s`;
       }
     });
 
@@ -302,6 +302,20 @@
 
     window.addEventListener('resize', checkFullscreen);
     checkFullscreen();
+
+    // Add console command for gaining cookies
+    window.game = {
+      gain: (num) => {
+        num = Number(num);
+        if (num >= 0 && num <= 10000) {
+          cookieCount += num;
+          console.log(`${formatNumber(num)} cookies earned! Now ${formatNumber(cookieCount)}`);
+          document.getElementById('cookieText').innerText = `${formatNumber(cookieCount)}`;
+        } else {
+          console.error("Must be between 0 and 10000.");
+        }
+      }
+    };
   </script>
 </body>
 </html>
