@@ -1,275 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>0 cookies - Cookie Clicks</title>
-    <style>
-        body {
-            font-family: 'Merriweather Sans', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background-image: url('https://freerangestock.com/sample/23112/winter-city-view.jpg');
-            background-size: cover;
-        }
-        #gameContainer {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        #cookie {
-            width: 220px;
-            height: 220px;
-            background-image: url('https://play-lh.googleusercontent.com/Z1MOuuiD05ZN5LkVmMEvKF0mqAc-FknaQ2j8s4dZiO-LSPQX4EEA3RVJdlQEtxe96ok');
-            background-size: cover;
-            cursor: pointer;
-            position: relative;
-            transition: transform 0.2s;
-            left: -320px;
-            top: 200px;
-            border-radius: 50%;
-        }
-        #cookie:hover {
-            transform: scale(1.15);
-        }
-        #cookieCount {
-            margin-top: 20px;
-            font-size: 34px;
-            color: #19bfa1;
-            position: relative;
-            left: -320px;
-            top: -220px;
-        }
-        #perSecond {
-            font-size: 18px;
-            color: white;
-            position: relative;
-            left: -320px;
-            right: -450px;
-            top: -200px;
-            text-align: center;
-            font-weight: regular;
-        }
-        #cursor, #upgrade, #farm {
-            width: 70px;
-            height: 70px;
-            background-size: cover;
-            cursor: pointer;
-            position: relative;
-            top: -240px;
-            left: 100px;
-            color: #000000;
-            text-align: center;
-            font-size: 14px;
-            border-radius: 50%;
-        }
-        #cursor {
-            background-image: url('https://static.vecteezy.com/system/resources/thumbnails/004/956/057/small_2x/hand-click-icon-symbol-vector.jpg');
-        }
-        #upgrade {
-            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh8DvpffsKdmOPzi22HRh7YYv-ouVdmDZR8A&s');
-            top: -240px;
-            left: 100px;
-        }
-        #farm {
-            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6HRnD80sta1lWAU4LDfh4J4827X4tjsBX8g&s');
-            top: -250px;
-            left: 100px;
-        }
-        #cursorTitle, #upgradeTitle, #farmTitle {
-            position: relative;
-            top: -210px;
-            left: 180px;
-            color: #19bfa1;
-            font-weight: bold;
-            font-size: 23px;
-        }
-        #upgradeTitle {
-            left: 217px;
-            top: -195px;
-        }
-        #farmTitle {
-            left: 165px;
-            top: -210px;
-        }
-        #cursorPrice, #upgradePrice, #farmPrice {
-            position: relative;
-            top: -275px;
-            left: 190px;
-            color: white;
-            font-size: 19px;
-            font-weight: regular;
-        }
-        #upgradePrice {
-            left: 195px;
-            top: -260px;
-        }
-        #farmPrice {
-            left: 195px;
-            top: -275px;
-        }
-        .clickClone {
-            position: absolute;
-            color: #ffffff;
-            font-size: 20px;
-            pointer-events: none;
-            opacity: 1;
-            transition: transform 0.337s ease-out, opacity 0.337s ease-out;
-        }
-        #fullscreenMessage {
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: rgb(0,0,0);
-            font-size: 24px;
-            background: rgb(29,255,109);
-            padding: 20px;
-            border-radius: 30px;
-        }
-        .fullscreen #gameContainer {
-            display: flex;
-        }
-        .fullscreen #fullscreenMessage {
-            display: none;
-        }
-        .fullscreen body {
-            background-image: url('https://www.shutterstock.com/image-photo/calgary-canada-4th-march-2018-600nw-1727486143.jpg');
-        }
-        body:not(.fullscreen) #gameContainer {
-            display: none;
-        }
-        body:not(.fullscreen) {
-            background: rgb(50,135,201);
-        }
-        body:not(.fullscreen) #fullscreenMessage {
-            display: block;
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>0 cookies - Cookie Clicks</title>
+  <style>
+    body {
+      font-family: 'Merriweather Sans', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-image: url('https://freerangestock.com/sample/23112/winter-city-view.jpg');
+      background-size: cover;
+    }
+    #gameContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      position: relative;
+    }
+    #cookie {
+      width: 220px;
+      height: 220px;
+      background-image: url('https://play-lh.googleusercontent.com/Z1MOuuiD05ZN5LkVmMEvKF0mqAc-FknaQ2j8s4dZiO-LSPQX4EEA3RVJdlQEtxe96ok');
+      background-size: cover;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.2s;
+      left: -320px;
+      top: 200px;
+      border-radius: 50%;
+    }
+    #cookie:hover {
+      transform: scale(1.15);
+    }
+    #cookieCount {
+      margin-top: 20px;
+      font-size: 34px;
+      color: #19bfa1;
+      position: relative;
+      left: -510px;
+      top: -280px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+    }
+    #cookieIcon {
+      width: 40px;
+      height: 40px;
+      background-image: url('https://play-lh.googleusercontent.com/Z1MOuuiD05ZN5LkVmMEvKF0mqAc-FknaQ2j8s4dZiO-LSPQX4EEA3RVJdlQEtxe96ok');
+      background-size: cover;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    #perSecond {
+      font-size: 18px;
+      color: white;
+      position: relative;
+      left: 200px;
+      right: -450px;
+      top: -310px;
+      text-align: center;
+      font-weight: normal;
+    }
+    #cursor, #upgrade, #farm {
+      width: 70px;
+      height: 70px;
+      background-size: cover;
+      cursor: pointer;
+      position: relative;
+      top: -240px;
+      left: 100px;
+      color: #000000;
+      text-align: center;
+      font-size: 14px;
+      border-radius: 50%;
+    }
+    #cursor {
+      background-image: url('https://static.vecteezy.com/system/resources/thumbnails/004/956/057/small_2x/hand-click-icon-symbol-vector.jpg');
+    }
+    #upgrade {
+      background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh8DvpffsKdmOPzi22HRh7YYv-ouVdmDZR8A&s');
+      top: -240px;
+      left: 100px;
+    }
+    #farm {
+      background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6HRnD80sta1lWAU4LDfh4J4827X4tjsBX8g&s');
+      top: -250px;
+      left: 100px;
+    }
+    /* --- Updated Title Styles --- */
+    #cursorTitle,
+    #upgradeTitle,
+    #farmTitle {
+      position: relative;
+      top: -210px;
+      margin-left: 0; /* Remove the left offset */
+      color: #19bfa1;
+      font-weight: bold;
+      font-size: 23px;
+      text-align: left;
+      left: 200px
+    }
+    /* Optional tweaks per element if needed */
+    #upgradeTitle {
+      top: -195px;
+    }
+    /* --- Updated Price Styles --- */
+    #cursorPrice,
+    #upgradePrice,
+    #farmPrice {
+      position: relative;
+      top: -275px;
+      margin-left: 0; /* Remove the left offset */
+      color: white;
+      font-size: 19px;
+      font-weight: normal;
+      text-align: left;
+      left: 200px;
+    }
+    #upgradePrice {
+      top: -260px;
+    }
+    #farmPrice {
+      top: -275px;
+    }
+    .clickClone {
+      position: absolute;
+      color: #ffffff;
+      font-size: 20px;
+      pointer-events: none;
+      opacity: 1;
+      transition: transform 0.337s ease-out, opacity 0.337s ease-out;
+    }
+    #fullscreenMessage {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: rgb(0, 0, 0);
+      font-size: 24px;
+      background: rgb(29, 255, 109);
+      padding: 20px;
+      border-radius: 30px;
+    }
+    .fullscreen #gameContainer {
+      display: flex;
+    }
+    .fullscreen #fullscreenMessage {
+      display: none;
+    }
+    .fullscreen body {
+      background-image: url('https://www.shutterstock.com/image-photo/calgary-canada-4th-march-2018-600nw-1727486143.jpg');
+    }
+    body:not(.fullscreen) #gameContainer {
+      display: none;
+    }
+    body:not(.fullscreen) {
+      background: rgb(50, 135, 201);
+    }
+    body:not(.fullscreen) #fullscreenMessage {
+      display: block;
+    }
+    body:not(.fullscreen) #fullscreenTopBar {
+      display: none;
+    }
+    #fullscreenTopBar {
+      width: 1377px;
+      height: 100px;
+      background: #2040a8;
+      border-radius: 25px;
+      position: absolute;
+      top: -40px;
+      left: -5px;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300&display=swap" rel="stylesheet" />
 </head>
 <body>
-    <div id="fullscreenMessage">Switch to full screen to play</div>
-    <div id="gameContainer">
-        <div id="cookie"></div>
-        <div id="cookieCount">0 cookies</div>
-        <div id="perSecond">per second: 0.0</div>
-        <div id="cursorTitle">Cursor</div>
-        <div id="cursor"></div>
-        <div id="cursorPrice" title="Price: 15 cookies">15 cookies</div>
-        <div id="upgradeTitle">Stumble Guys</div>
-        <div id="upgrade"></div>
-        <div id="upgradePrice" title="Price: 100 cookies">100 cookies</div>
-        <div id="farmTitle">Farm</div>
-        <div id="farm"></div>
-        <div id="farmPrice" title="Price: 1200 cookies">1200 cookies</div>
+  <div id="fullscreenMessage">Switch to full screen to play</div>
+  <div id="fullscreenTopBar"></div>
+  <div id="gameContainer">
+    <div id="cookie"></div>
+    <div id="cookieCount">
+      <div id="cookieIcon"></div>
+      <div id="cookieText">0</div>
     </div>
+    <div id="perSecond">+0.0  cookies/s</div>
+    <div id="cursorTitle">Cursor</div>
+    <div id="cursor"></div>
+    <div id="cursorPrice" title="Price: 15 cookies">15 cookies</div>
+    <div id="upgradeTitle">Stumble Guys</div>
+    <div id="upgrade"></div>
+    <div id="upgradePrice" title="Price: 100 cookies">100 cookies</div>
+    <div id="farmTitle">Farm</div>
+    <div id="farm"></div>
+    <div id="farmPrice" title="Price: 1200 cookies">1200 cookies</div>
+  </div>
 
-    <script>
-        let cookieCount = 0;
-        let cookiesPerClick = 1;
-        let cookiesPerSecond = 0.0;
-        let cursorPrice = 15;
-        let upgradePrice = 100;
-        let farmPrice = 1200;
+  <script>
+    let cookieCount = 0;
+    let cookiesPerClick = 1;
+    let cookiesPerSecond = 0.0;
+    let cursorPrice = 15;
+    let upgradePrice = 100;
+    let farmPrice = 1200;
 
-        const formatNumber = (num) => {
-            if (num < 1000000) {
-                return Math.floor(num);
-            }
-            return num.toExponential(3).replace('e+', 'e');
-        };
+    const formatNumber = (num) => {
+      if (num < 1000000) {
+        return Math.floor(num);
+      }
+      return num.toExponential(3).replace('e+', 'e');
+    };
 
-        const formatPerSecond = (num) => {
-            if (num < 100000) {
-                return num.toFixed(1);
-            }
-            return num.toExponential(3).replace('e+', 'e');
-        };
+    const formatPerSecond = (num) => {
+      if (num < 100000) {
+        return num.toFixed(1);
+      }
+      return num.toExponential(3).replace('e+', 'e');
+    };
 
-        const createClickClone = (x, y) => {
-            const clickClone = document.createElement('div');
-            clickClone.className = 'clickClone';
-            clickClone.innerText = '+1';
-            clickClone.style.left = `${x}px`;
-            clickClone.style.top = `${y}px`;
-            document.body.appendChild(clickClone);
-            setTimeout(() => {
-                clickClone.style.transform = 'translateY(-50px) translateX(0px)';
-                clickClone.style.opacity = '0';
-            }, 10);
-            setTimeout(() => {
-                clickClone.remove();
-            }, 337);
-        };
+    const createClickClone = (x, y) => {
+      const clickClone = document.createElement('div');
+      clickClone.className = 'clickClone';
+      clickClone.innerText = '+1';
+      clickClone.style.left = `${x}px`;
+      clickClone.style.top = `${y}px`;
+      document.body.appendChild(clickClone);
+      setTimeout(() => {
+        clickClone.style.transform = 'translateY(-50px) translateX(0px)';
+        clickClone.style.opacity = '0';
+      }, 10);
+      setTimeout(() => {
+        clickClone.remove();
+      }, 337);
+    };
 
-        document.getElementById('cookie').addEventListener('click', (event) => {
-            cookieCount += cookiesPerClick;
-            document.getElementById('cookieCount').innerText = `${formatNumber(cookieCount)} cookies`;
-            createClickClone(event.clientX, event.clientY);
-        });
+    document.getElementById('cookie').addEventListener('click', (event) => {
+      cookieCount += cookiesPerClick;
+      document.getElementById('cookieText').innerText = `${formatNumber(cookieCount)}`;
+      createClickClone(event.clientX, event.clientY);
+    });
 
-        document.getElementById('cursor').addEventListener('click', () => {
-            if (cookieCount >= cursorPrice) {
-                cookieCount -= cursorPrice;
-                cookiesPerSecond += 0.1;
-                cursorPrice = Math.round(cursorPrice * 1.15);
-                document.getElementById('cookieCount').innerText = `${formatNumber(cookieCount)} cookies`;
-                document.getElementById('cursorPrice').innerText = `${formatNumber(cursorPrice)} cookies`;
-                document.getElementById('cursor').title = `Price: ${formatNumber(cursorPrice)} cookies`;
-                document.getElementById('perSecond').innerText = `per second: ${formatPerSecond(cookiesPerSecond)}`;
-            }
-        });
+    document.getElementById('cursor').addEventListener('click', () => {
+      if (cookieCount >= cursorPrice) {
+        cookieCount -= cursorPrice;
+        cookiesPerSecond += 0.1;
+        cursorPrice = Math.round(cursorPrice * 1.15);
+        document.getElementById('cookieText').innerText = `${formatNumber(cookieCount)}`;
+        document.getElementById('cursorPrice').innerText = `${formatNumber(cursorPrice)} cookies`;
+        document.getElementById('cursor').title = `Price: ${formatNumber(cursorPrice)} cookies`;
+        document.getElementById('perSecond').innerText = `+${formatPerSecond(cookiesPerSecond)} cookies/s`;
+      }
+    });
 
-        document.getElementById('upgrade').addEventListener('click', () => {
-            if (cookieCount >= upgradePrice) {
-                cookieCount -= upgradePrice;
-                cookiesPerSecond += 1;
-                upgradePrice = Math.round(upgradePrice * 1.15);
-                document.getElementById('cookieCount').innerText = `${formatNumber(cookieCount)} cookies`;
-                document.getElementById('upgradePrice').innerText = `${formatNumber(upgradePrice)} cookies`;
-                document.getElementById('upgrade').title = `Price: ${formatNumber(upgradePrice)} cookies`;
-                document.getElementById('perSecond').innerText = `per second: ${formatPerSecond(cookiesPerSecond)}`;
-            }
-        });
+    document.getElementById('upgrade').addEventListener('click', () => {
+      if (cookieCount >= upgradePrice) {
+        cookieCount -= upgradePrice;
+        cookiesPerSecond += 1;
+        upgradePrice = Math.round(upgradePrice * 1.15);
+        document.getElementById('cookieText').innerText = `${formatNumber(cookieCount)}`;
+        document.getElementById('upgradePrice').innerText = `${formatNumber(upgradePrice)} cookies`;
+        document.getElementById('upgrade').title = `Price: ${formatNumber(upgradePrice)} cookies`;
+        document.getElementById('perSecond').innerText = `per second: ${formatPerSecond(cookiesPerSecond)}`;
+      }
+    });
 
-        document.getElementById('farm').addEventListener('click', () => {
-            if (cookieCount >= farmPrice) {
-                cookieCount -= farmPrice;
-                cookiesPerSecond += 8;
-                farmPrice = Math.round(farmPrice * 1.15);
-                document.getElementById('cookieCount').innerText = `${formatNumber(cookieCount)} cookies`;
-                document.getElementById('farmPrice').innerText = `${formatNumber(farmPrice)} cookies`;
-                document.getElementById('farm').title = `Price: ${formatNumber(farmPrice)} cookies`;
-                document.getElementById('perSecond').innerText = `per second: ${formatPerSecond(cookiesPerSecond)}`;
-            }
-        });
+    document.getElementById('farm').addEventListener('click', () => {
+      if (cookieCount >= farmPrice) {
+        cookieCount -= farmPrice;
+        cookiesPerSecond += 8;
+        farmPrice = Math.round(farmPrice * 1.15);
+        document.getElementById('cookieText').innerText = `${formatNumber(cookieCount)}`;
+        document.getElementById('farmPrice').innerText = `${formatNumber(farmPrice)} cookies`;
+        document.getElementById('farm').title = `Price: ${formatNumber(farmPrice)} cookies`;
+        document.getElementById('perSecond').innerText = `per second: ${formatPerSecond(cookiesPerSecond)}`;
+      }
+    });
 
-        setInterval(() => {
-            cookieCount += cookiesPerSecond / 10;
-            document.getElementById('cookieCount').innerText = `${formatNumber(cookieCount)} cookies`;
-        }, 100);
+    setInterval(() => {
+      cookieCount += cookiesPerSecond / 10;
+      document.getElementById('cookieText').innerText = `${formatNumber(cookieCount)}`;
+    }, 100);
 
-        setInterval(() => {
-            document.title = `${formatNumber(cookieCount)} cookies - Cookie Clicks`;
-        }, 1000);
+    setInterval(() => {
+      document.title = `${formatNumber(cookieCount)} cookies - Cookie Clicks`;
+    }, 1000);
 
-        const checkFullscreen = () => {
-            if (window.innerHeight === screen.height) {
-                document.body.classList.add('fullscreen');
-            } else {
-                document.body.classList.remove('fullscreen');
-            }
-        };
+    const checkFullscreen = () => {
+      if (window.innerHeight === screen.height) {
+        document.body.classList.add('fullscreen');
+      } else {
+        document.body.classList.remove('fullscreen');
+      }
+    };
 
-        window.addEventListener('resize', checkFullscreen);
-        checkFullscreen();
-    </script>
+    window.addEventListener('resize', checkFullscreen);
+    checkFullscreen();
+  </script>
 </body>
 </html>
