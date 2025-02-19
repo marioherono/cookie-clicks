@@ -59,13 +59,13 @@
       color: black;
       font-weight: normal;
     }
-    #cursor, #upgrade, #farm {
+    #cursor, #upgrade, #farm, #mine {
       width: 70px;
       height: 70px;
       background-size: cover;
       cursor: pointer;
       position: relative;
-      top: -240px;
+      top: -70px;
       left: 100px;
       color: #000000;
       text-align: center;
@@ -77,20 +77,26 @@
     }
     #upgrade {
       background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh8DvpffsKdmOPzi22HRh7YYv-ouVdmDZR8A&s');
-      top: -240px;
+      top: -70px;
       left: 100px;
     }
     #farm {
       background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6HRnD80sta1lWAU4LDfh4J4827X4tjsBX8g&s');
-      top: -250px;
+      top: -80px;
+      left: 100px;
+    }
+    #mine {
+      background-image: url('https://www.bpmcdn.com/f/files/terrace/import/2022-10/30686624_web1_221012-GFG-Mine-photos_1.jpg;w=960;h=640;bgcolor=000000');
+      top: -85px;
       left: 100px;
     }
     /* --- Updated Title Styles --- */
     #cursorTitle,
     #upgradeTitle,
-    #farmTitle {
+    #farmTitle,
+    #mineTitle {
       position: relative;
-      top: -210px;
+      top: -40px;
       margin-left: 0; /* Remove the left offset */
       color: #19e0ab;
       font-weight: bold;
@@ -100,14 +106,21 @@
     }
     /* Optional tweaks per element if needed */
     #upgradeTitle {
-      top: -195px;
+      top: -25px;
+    }
+    #farmTitle {
+      top: -35px;
+    }
+    #mineTitle {
+      top: -45px;
     }
     /* --- Updated Price Styles --- */
     #cursorPrice,
     #upgradePrice,
-    #farmPrice {
+    #farmPrice,
+    #minePrice {
       position: relative;
-      top: -275px;
+      top: -105px;
       margin-left: 0; /* Remove the left offset */
       color: #19e0ab;
       font-size: 19px;
@@ -116,10 +129,13 @@
       left: 200px;
     }
     #upgradePrice {
-      top: -260px;
+      top: -90px;
     }
     #farmPrice {
-      top: -275px;
+      top: -105px;
+    }
+    #minePrice {
+      top: -115px;
     }
     .clickClone {
       position: absolute;
@@ -165,7 +181,7 @@
     #fullscreenTopBar {
       width: 100%;
       height: 100px;
-      background: #19e0ab;
+      background: #1c3659;
       border-radius: 25px;
       position: absolute;
       top: 0;
@@ -179,7 +195,7 @@
     #fullscreenTopBar #cookieCount, #fullscreenTopBar #perSecond {
       margin: 0;
       position: static;
-      color: #000000;
+      color: #ffffff;
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300&display=swap" rel="stylesheet" />
@@ -203,7 +219,10 @@
     <div id="upgradePrice" title="Price: 100 cookies">100 cookies</div>
     <div id="farmTitle">Farm</div>
     <div id="farm"></div>
-    <div id="farmPrice" title="Price: 1200 cookies">1200 cookies</div>
+    <div id="farmPrice" title="Price: 1200 cookies">1,100 cookies</div>
+    <div id="mineTitle">Mine</div>
+    <div id="mine"></div>
+    <div id="minePrice" title="Price: 12000 cookies">12,000 cookies</div>
   </div>
 
   <script>
@@ -212,20 +231,29 @@
     let cookiesPerSecond = 0.0;
     let cursorPrice = 15;
     let upgradePrice = 100;
-    let farmPrice = 1200;
+    let farmPrice = 1100;
+    let minePrice = 12000;
 
     const formatNumber = (num) => {
-      if (num < 1000000) {
-        return Math.floor(num);
+      if (num < 1000) return Math.floor(num);
+      if (num < 1000000) return num.toLocaleString();
+      if (num >= 1000000) {
+        let exp = Math.floor(Math.log(num) / Math.log(1000));
+        let suffix = 'e' + (exp * 3);
+        let value = (num / Math.pow(1000, exp)).toFixed(2);
+        return value + suffix;
       }
-      return num.toExponential(3).replace('e+', 'e');
     };
 
     const formatPerSecond = (num) => {
-      if (num < 1000000) {
-        return num.toFixed(1);
+      if (num < 1000) return num.toFixed(1);
+      if (num < 1000000) return num.toLocaleString(undefined, { maximumFractionDigits: 1 });
+      if (num >= 1000000) {
+        let exp = Math.floor(Math.log(num) / Math.log(1000));
+        let suffix = 'e' + (exp * 3);
+        let value = (num / Math.pow(1000, exp)).toFixed(1);
+        return value + suffix;
       }
-      return num.toExponential(3).replace('e+', 'e');
     };
 
     const createClickClone = (x, y) => {
@@ -282,6 +310,18 @@
         document.getElementById('cookieText').innerText = `${formatNumber(cookieCount)}`;
         document.getElementById('farmPrice').innerText = `${formatNumber(farmPrice)} cookies`;
         document.getElementById('farm').title = `Price: ${formatNumber(farmPrice)} cookies`;
+        document.getElementById('perSecond').innerText = `+${formatPerSecond(cookiesPerSecond)} cookies/s`;
+      }
+    });
+
+    document.getElementById('mine').addEventListener('click', () => {
+      if (cookieCount >= minePrice) {
+        cookieCount -= minePrice;
+        cookiesPerSecond += 47;
+        minePrice = Math.round(minePrice * 1.15);
+        document.getElementById('cookieText').innerText = `${formatNumber(cookieCount)}`;
+        document.getElementById('minePrice').innerText = `${formatNumber(minePrice)} cookies`;
+        document.getElementById('mine').title = `Price: ${formatNumber(minePrice)} cookies`;
         document.getElementById('perSecond').innerText = `+${formatPerSecond(cookiesPerSecond)} cookies/s`;
       }
     });
