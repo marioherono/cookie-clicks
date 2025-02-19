@@ -227,7 +227,7 @@
 
   <script>
     let cookieCount = 0;
-    let cookiesPerClick = 225.5;
+    let cookiesPerClick = 1;
     let cookiesPerSecond = 0;
     let cursorPrice = 15;
     let upgradePrice = 100;
@@ -349,7 +349,7 @@
     window.game = {
       gain: (num) => {
         num = Number(num);
-        if (num >= 0 && num <= 10000) {
+        if (num >= 0 && num <= 1000) {
           cookieCount += num;
           console.log(`${formatNumber(num)} cookies earned! Now ${formatNumber(cookieCount)}`);
           document.getElementById('cookieText').innerText = `${formatNumber(cookieCount)}`;
