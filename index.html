@@ -353,7 +353,7 @@
           if (cookieCount >= CPCcost) {
             cookieCount -= CPCcost;
             cookiesPerClick += 1;
-            CPCcost = Math.ceil(CPCcost * 1.2);
+            CPCcost = Math.round(CPCcost * 1.2);
             console.log(`Success! Now upgrade CPC for ${formatNumber(CPCcost)} cookies`);
             document.getElementById('cookieText').innerText = `${formatNumber(cookieCount)}`;
           } else {
