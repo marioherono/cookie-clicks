@@ -233,8 +233,9 @@
     let upgradePrice = 100;
     let farmPrice = 1100;
     let minePrice = 12000;
+    let CPCcost = 3000;
 
-   const formatNumber = (num) => {
+    const formatNumber = (num) => {
       if (num < 1000) return Math.floor(num).toLocaleString();
       if (num < 1000000) return Math.floor(num).toLocaleString();
       if (num >= 1000000) {
@@ -346,18 +347,26 @@
     checkFullscreen();
 
     // Add console command for gaining cookies
-    window.game = {
-      gain: (num) => {
-        num = Number(num);
-        if (num >= 0 && num <= 1000) {
-          cookieCount += num;
-          console.log(`${formatNumber(num)} cookies earned! Now ${formatNumber(cookieCount)}`);
-          document.getElementById('cookieText').innerText = `${formatNumber(cookieCount)}`;
+    window.Click = {
+      Upgrade: (buy) => {
+        if (buy) {
+          if (cookieCount >= CPCcost) {
+            cookieCount -= CPCcost;
+            cookiesPerClick += 1;
+            CPCcost = Math.ceil(CPCcost * 1.2);
+            console.log(`Success! Now upgrade CPC for ${formatNumber(CPCcost)} cookies`);
+            document.getElementById('cookieText').innerText = `${formatNumber(cookieCount)}`;
+          } else {
+            console.error(`Not enough cookies. Need ${formatNumber(CPCcost)} cookies to upgrade.`);
+          }
         } else {
-          console.error("Must be between 0 and 10000.");
+          console.error("Invalid command. Use Click.Upgrade(buy) to upgrade CPC.");
         }
       }
     };
+
+    // Show initial upgrade message
+    console.log(`Upgrade CPC for ${formatNumber(CPCcost)} cookies`);
   </script>
 </body>
 </html>
